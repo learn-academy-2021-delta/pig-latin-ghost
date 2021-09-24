@@ -20,6 +20,7 @@ class App extends Component{
   myPigLatinCodeHere = () => {
     // the variable "userInput" will contain the text input from the user modified into an array of words
     // no need to change this variable
+    //If words begin with a vowel add 'way' to the end. So test first letter of word to see if its a vowel and if it is .push 'way' to word.
     let userInput = this.state.phrase.split(" ")
     console.log("userInput:", userInput)
 
@@ -27,13 +28,23 @@ class App extends Component{
     let translatedWordsArray = userInput.map(currentWord => {
       // ACTION ITEM: use "currentWord" as a starting point for your code
       console.log("currentWord:", currentWord)
-
+ 
       let vowelsArray = currentWord.split("").filter(vowel => {
         return vowel === "a" || vowel === "e" || vowel === "i" || vowel === "o" || vowel === "u"
       })
       console.log("vowelsArray:", vowelsArray)
+      // console.log(vowelsArray[0])
+      // console.log(currentWord.indexOf(vowelsArray[0]))
 
       // your code here!
+      if(currentWord[0] === vowelsArray[0]){
+        return currentWord += 'way'
+      } else if (currentWord.indexOf(vowelsArray) > 0){
+        let cutIndex = currentWord.indexOf(vowelsArray[0]);
+        console.log(cutIndex)
+        let newWord = currentWord.slice(0, cutIndex)
+        return newWord;
+      }
 
       // Remember: console.log is your friend :)
 
@@ -99,7 +110,7 @@ class App extends Component{
           <button onClick={this.restartGame}>Clear</button>
         </div>
         <p>{this.state.phraseTranslated}</p>
-        <footer>Coded by ~your name here~</footer>
+        <footer>Coded by ~Ato and Rob~</footer>
       </>
     )
   }
